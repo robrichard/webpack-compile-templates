@@ -1,6 +1,6 @@
 #webpack-compile-templates
 
-Webpack version of [this](https://githubt.com/robrichard/browserify-compile-templates)
+Webpack version of [this](https://github.com/robrichard/browserify-compile-templates).
 
 Compiles [underscore](http://underscorejs.org/#template) templates from HTML script tags into CommonJS in a webpack loader. You can add multiple script tags to  each file. Requiring the file will return an object with a property for each script tag. The ID attribute is the key and the compiled template function as the value.
 

@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "underscore": "^1.6.0",
-    "htmlparser2": "~3.7.1",
+    "htmlparser2": "~3.7.1"
   },
   "keywords": [
     "template",
