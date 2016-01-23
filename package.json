@@ -15,9 +15,13 @@
     "name": "Rob Richard",
     "email": "rob@robrichard.net"
   },
+  "peerDependencies": {
+    "underscore": "^1.6.0"
+  },
   "dependencies": {
-    "underscore": "^1.6.0",
-    "htmlparser2": "~3.7.1"
+    "htmlparser2": "~3.7.1",
+    "lodash.foreach": "^4.0.0",
+    "lodash.template": "^4.0.0"
   },
   "keywords": [
     "template",
