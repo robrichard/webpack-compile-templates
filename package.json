@@ -4,6 +4,9 @@
   "description": "Compiles templates from HTML script tags into CommonJS modules in a webpack-loader",
   "main": "index.js",
   "homepage": "https://github.com/robrichard/webpack-compile-templates",
+  "scripts": {
+    "test": "mocha"
+  },
   "bugs": {
     "url": "https://github.com/robrichard/webpack-compile-templates/issues"
   },
@@ -33,5 +36,10 @@
   "readme": "#browserify-compile-templates\n\nCompiles [underscore](http://underscorejs.org/#template) templates from HTML script tags into CommonJS in a browserify transform. You can add multiple script tags to  each file. Requiring the file will return an object with a property for each script tag. The ID attribute is the key and the compiled template function as the value.\n\nSee the [underscore documentation](http://underscorejs.org/#template) for more details.\n\n\n# Usage\n\n## Install\n\n```\nnpm install --save-dev browserify-compile-templates\n```\n\n## Create a template file\nmyTemplates.html\n\nUse the ID attribute to identify the template from your JS source.\nUse data-variable-name to change the variable name that is used in the underscore template. obj is the default\n\n```html\n<script type=\"text/template\" id=\"template1\">\n\t<h2><%- obj.title %></h2>\n</script>\n\n<script type=\"text/template\" id=\"template2\" data-variable-name=\"data\">\n\t<li><%- data.name %> <<%- data.email %>></li>\n</script>\n```\n\n## Require the template file\nA JS file\n\n```javascript\nvar $ = require('jquery');\nvar templates = require('/path/to/myTemplates');\n\n$('.container').html(templates.template1({ title: 'My Page Title' }));\n$('.container').append(templates.template2({\n\tname: 'Rob',\n\temail 'rob@example.com'\n}));\n```\n\n## Add to browserify\nRegister the template and tell browserify to look for html extensions\n```\nbrowserify -t browserify-compile-templates --extension=.html\n```\n\n# Why?\nThe advantage of this transform over other transforms or plugins is that the templates are backwards compatible with non-browserified code. Template files formatted this way can also be included directly in HTML. A UMD module that is shared in both a browserified and non-browserified codebase can be used like this:\n\n```javascript\n(function (root, factory) {\n    if (typeof module !== 'undefined') {\n        // CommonJS - templates are precompiled and bundled in with JS\n        var templates = require('/path/to/myTemplates');\n        factory(\n            module,\n            templates.template1,\n            templates.tempalte2\n        );\n    } else {\n        // Borwser globals. Templates are included in html and need to be compiled client-side\n        var $template1 = $('#template1');\n        var $tempalte2 = $('#template2');\n        factory(\n            _module,\n            _.template($template1.html(), null, {variable: $template.attr('data-variable-name')),\n            _.template($template2.html(), null, {variable: $template.attr('data-variable-name'))\n        );\n    }\n}(window || global, function (module, template1, template2) {\n// Use compliled templates in here\n}));\n```\n\nThe commonJS environment gets the benefit of the precompiled template. Other environments can still include the file on the page and access it by ID.\n",
   "readmeFilename": "README.md",
   "_id": "browserify-compile-templates@0.1.0",
+  "devDependencies": {
+    "mocha": "^2.4.5",
+    "rimraf": "^2.5.2",
+    "webpack": "^1.13.0"
+  },
   "_from": "browserify-compile-templates@"
 }
